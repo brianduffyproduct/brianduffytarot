@@ -19,7 +19,6 @@ async function isOpen() {
 
 function show(open) {
   $("open").hidden = !open;
-  $("closed").hidden = open;
   if (!open && dialog.open) dialog.close();
 }
 

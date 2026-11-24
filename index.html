@@ -16,7 +16,7 @@
         We pull the cards and make sense of what's going on, so you can get moving again.</p>
     </header>
 
-    <!-- Shown while readings are open -->
+    <!-- Reading buttons: added to the top of the list while readings are open -->
     <section id="open" hidden>
       <p class="status"><span class="dot" aria-hidden="true"></span> Live now: readings are open</p>
       <div class="buttons">
@@ -33,19 +33,26 @@
           <span class="name">Three cards</span><span class="price">$15</span>
         </button>
       </div>
-      <p class="how">I'll pull your cards live on Instagram, in the order readings come in, and talk through what they reflect. Stay on the live for yours.</p>
-      <p class="fine">For reflection and entertainment. No medical, legal or financial questions. 18+. <a href="/terms">Terms</a></p>
+      <p class="fine">Cards pulled live on Instagram in the order readings come in. For reflection and entertainment. No medical, legal or financial questions. 18+. <a href="/terms">Terms</a></p>
     </section>
 
-    <!-- Shown while readings are closed -->
-    <section id="closed">
-      <p class="status closed">Readings are closed right now.</p>
-      <p class="how">I take reading orders while I'm live on Instagram. Follow along to catch the next one.</p>
-      <a class="ig" href="https://instagram.com/brianduffygram">@brianduffygram on Instagram</a>
-    </section>
+    <!-- Links: always shown -->
+    <nav class="buttons links" aria-label="Links">
+      <a class="reading" href="https://instagram.com/brianduffygram">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 3.5v2M12 18.5v2M3.5 12h2M18.5 12h2M6 6l1.4 1.4M16.6 16.6 18 18M6 18l1.4-1.4M16.6 7.4 18 6"/></svg>
+        </span>
+        <span class="name">Watch me read live<small>@brianduffygram on Instagram</small></span><span class="arrow" aria-hidden="true">›</span>
+      </a>
+      <a class="reading" href="https://www.skool.com/the-arcana-conservatory-6657">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 4 4 8l8 4 8-4-8-4Z"/><path d="M7 10v4.5c0 1.4 2.2 2.8 5 2.8s5-1.4 5-2.8V10"/><path d="M20 8v5"/></svg>
+        </span>
+        <span class="name">Learn Tarot<small>The Arcana Conservatory</small></span><span class="arrow" aria-hidden="true">›</span>
+      </a>
+    </nav>
 
     <footer>
-      <a href="https://www.skool.com/the-arcana-conservatory-6657">Learn Tarot at The Arcana Conservatory</a>
       <a href="/terms">Terms</a>
       <a href="mailto:brian@brian-duffy.com">brian@brian-duffy.com</a>
     </footer>

@@ -36,12 +36,21 @@ h1 { font-weight: normal; font-size: clamp(2rem, 9vw, 2.8rem); margin: .6rem 0; 
 .cards i { width: 16px; height: 26px; border: 1.5px solid var(--gold); border-radius: 3px;
   background: linear-gradient(135deg, #4a2c52, #2a1a30); }
 
+a.reading { text-decoration: none; }
+.reading .name small { display: block; font-size: .85rem; color: var(--muted); margin-top: .1rem; }
+.reading .arrow { color: var(--gold-hi); font-size: 1.8rem; line-height: 1; padding-right: .2rem; }
+.icon { display: flex; }
+.icon svg { width: 30px; height: 30px; fill: none; stroke: var(--gold); stroke-width: 1.5;
+  stroke-linecap: round; stroke-linejoin: round; }
+#open { margin-bottom: .9rem; }
+#open .fine { margin: .9rem 0 1.6rem; }
+.links { margin-top: 0; }
 .how { margin-top: 1.25rem; color: var(--muted); }
 .fine { margin-top: 1rem; font-size: .85rem; color: var(--muted); }
 .ig { display: inline-block; margin-top: 1rem; padding: .8rem 1.3rem; border: 1px solid var(--gold);
   border-radius: 999px; text-decoration: none; }
 
-footer { margin-top: 3rem; display: flex; flex-direction: column; gap: .5rem; font-size: .9rem; }
+footer { margin-top: 2.5rem; display: flex; justify-content: center; gap: 1.5rem; font-size: .9rem; }
 
 dialog {
   margin: auto; width: min(28rem, calc(100% - 2rem)); padding: 1.5rem; border: 1px solid var(--gold); border-radius: 16px;
