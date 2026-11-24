@@ -1,0 +1,75 @@
+:root {
+  --ink: #f3e7c9; --muted: #cbbfa6; --gold: #d4a94e; --gold-hi: #f0cb74;
+  --bg: #1c1220; --panel: #2a1a30; --live: #e2574c;
+}
+* { box-sizing: border-box; margin: 0; }
+html { -webkit-text-size-adjust: 100%; background: var(--bg); }
+body {
+  min-height: 100vh; padding: max(1.5rem, env(safe-area-inset-top)) 1.25rem 2rem;
+  background: radial-gradient(ellipse at top, #3a2140 0%, var(--bg) 70%) fixed;
+  color: var(--ink); font-family: Georgia, "Times New Roman", serif; line-height: 1.55;
+}
+main { max-width: 30rem; margin: 0 auto; text-align: center; }
+a { color: var(--gold); }
+header { margin: 1rem 0 2rem; }
+.stars { color: var(--gold); letter-spacing: .6em; }
+h1 { font-weight: normal; font-size: clamp(2rem, 9vw, 2.8rem); margin: .6rem 0; letter-spacing: .03em; }
+.lede { color: var(--muted); }
+
+.status { font-size: 1.1rem; margin-bottom: 1.25rem; }
+.status.closed { font-size: 1.3rem; margin-bottom: .75rem; }
+.dot { display: inline-block; width: .6em; height: .6em; border-radius: 50%; background: var(--live);
+  margin-right: .3em; animation: pulse 1.6s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: .35; } }
+
+.buttons { display: grid; gap: .9rem; }
+.reading {
+  display: grid; grid-template-columns: 3.75rem 1fr auto; align-items: center; gap: .75rem;
+  width: 100%; padding: 1.1rem 1.25rem; border: 1px solid var(--gold); border-radius: 14px;
+  background: var(--panel); color: var(--ink); font: inherit; font-size: 1.25rem; text-align: left;
+  cursor: pointer; transition: transform .1s, background .2s;
+}
+.reading:hover, .reading:focus-visible { background: #3a2442; outline: none; }
+.reading:active { transform: scale(.98); }
+.reading .price { color: var(--gold-hi); font-size: 1.35rem; }
+.cards { display: flex; gap: 4px; }
+.cards i { width: 16px; height: 26px; border: 1.5px solid var(--gold); border-radius: 3px;
+  background: linear-gradient(135deg, #4a2c52, #2a1a30); }
+
+.how { margin-top: 1.25rem; color: var(--muted); }
+.fine { margin-top: 1rem; font-size: .85rem; color: var(--muted); }
+.ig { display: inline-block; margin-top: 1rem; padding: .8rem 1.3rem; border: 1px solid var(--gold);
+  border-radius: 999px; text-decoration: none; }
+
+footer { margin-top: 3rem; display: flex; flex-direction: column; gap: .5rem; font-size: .9rem; }
+
+dialog {
+  margin: auto; width: min(28rem, calc(100% - 2rem)); padding: 1.5rem; border: 1px solid var(--gold); border-radius: 16px;
+  background: var(--panel); color: var(--ink); font-family: inherit;
+}
+dialog::backdrop { background: rgba(10, 5, 12, .75); }
+dialog h2 { font-weight: normal; margin-bottom: 1rem; }
+dialog label { display: block; }
+.handle { display: flex; align-items: center; margin: .4rem 0 .3rem; border: 1px solid var(--muted);
+  border-radius: 10px; background: var(--bg); }
+.handle span { padding-left: .8rem; color: var(--muted); }
+.handle input { flex: 1; padding: .8rem .5rem; border: 0; background: transparent; color: var(--ink);
+  font-size: 1.1rem; outline: none; }
+.handle:focus-within { border-color: var(--gold); }
+.hint { font-size: .85rem; color: var(--muted); }
+.agree { display: flex !important; gap: .6rem; align-items: flex-start; margin-top: 1rem; font-size: .95rem; }
+.agree input { width: 1.3rem; height: 1.3rem; margin-top: .15rem; flex-shrink: 0; accent-color: var(--gold); }
+.error { min-height: 1.2em; margin-top: .6rem; color: #ff9b8f; font-size: .9rem; }
+.actions { display: flex; gap: .6rem; margin-top: .6rem; }
+.actions button { flex: 1; padding: .9rem; border-radius: 10px; font: inherit; font-size: 1rem; cursor: pointer;
+  border: 1px solid var(--gold); background: var(--gold); color: #1c1220; }
+.actions button.secondary { flex: 0 0 auto; background: transparent; color: var(--ink); }
+.actions button:disabled { opacity: .45; cursor: not-allowed; }
+
+/* Terms and live pages */
+.page { text-align: left; }
+.page h1 { text-align: center; }
+.page h2 { font-weight: normal; color: var(--gold-hi); margin: 1.75rem 0 .5rem; font-size: 1.25rem; }
+.page p, .page li { color: var(--ink); margin-bottom: .6rem; }
+.page ul { padding-left: 1.2rem; }
+.back { display: block; text-align: center; margin-top: 2rem; }

@@ -2,35 +2,71 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Brian Duffy Tarot</title>
-  <meta name="description" content="Tarot readings, classes and resources from Brian Duffy. New site coming soon.">
-  <style>
-    :root { --ink:#f3e7c9; --gold:#d4a94e; --bg:#1c1220; }
-    * { box-sizing:border-box; margin:0; }
-    body {
-      min-height:100vh; display:grid; place-items:center; padding:2rem;
-      background: radial-gradient(ellipse at top, #3a2140 0%, var(--bg) 70%);
-      color:var(--ink); font-family: Georgia, "Times New Roman", serif; text-align:center;
-    }
-    main { max-width:34rem; }
-    .star { color:var(--gold); font-size:1.5rem; letter-spacing:.6em; }
-    h1 { font-weight:normal; font-size:clamp(2rem,6vw,3.2rem); margin:1rem 0 .5rem; letter-spacing:.04em; }
-    p { line-height:1.6; opacity:.85; }
-    nav { margin-top:2rem; display:flex; gap:1.5rem; justify-content:center; flex-wrap:wrap; }
-    a { color:var(--gold); text-decoration:none; border-bottom:1px solid transparent; }
-    a:hover { border-color:var(--gold); }
-  </style>
+  <meta name="description" content="Live Tarot readings with Brian Duffy on Instagram. One, two or three cards.">
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
   <main>
-    <div class="star" aria-hidden="true">✦ ✦ ✦</div>
-    <h1>Brian Duffy Tarot</h1>
-    <p>A new home for readings, classes and Tarot resources is on its way.</p>
-    <nav>
-      <a href="https://instagram.com/brianduffygram">Instagram</a>
-      <a href="https://www.skool.com/the-arcana-conservatory-6657">The Arcana Conservatory</a>
-    </nav>
+    <header>
+      <div class="stars" aria-hidden="true">✦ ✦ ✦</div>
+      <h1>Brian Duffy Tarot</h1>
+      <p class="lede">Tarot is a mirror, not a crystal ball. Nobody's predicting your future here.
+        We pull the cards and make sense of what's going on, so you can get moving again.</p>
+    </header>
+
+    <!-- Shown while readings are open -->
+    <section id="open" hidden>
+      <p class="status"><span class="dot" aria-hidden="true"></span> Live now: readings are open</p>
+      <div class="buttons">
+        <button class="reading" data-cards="1">
+          <span class="cards" aria-hidden="true"><i></i></span>
+          <span class="name">One card</span><span class="price">$5</span>
+        </button>
+        <button class="reading" data-cards="2">
+          <span class="cards" aria-hidden="true"><i></i><i></i></span>
+          <span class="name">Two cards</span><span class="price">$10</span>
+        </button>
+        <button class="reading" data-cards="3">
+          <span class="cards" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="name">Three cards</span><span class="price">$15</span>
+        </button>
+      </div>
+      <p class="how">I'll pull your cards live on Instagram, in the order readings come in, and talk through what they reflect. Stay on the live for yours.</p>
+      <p class="fine">For reflection and entertainment. No medical, legal or financial questions. 18+. <a href="/terms">Terms</a></p>
+    </section>
+
+    <!-- Shown while readings are closed -->
+    <section id="closed">
+      <p class="status closed">Readings are closed right now.</p>
+      <p class="how">I take reading orders while I'm live on Instagram. Follow along to catch the next one.</p>
+      <a class="ig" href="https://instagram.com/brianduffygram">@brianduffygram on Instagram</a>
+    </section>
+
+    <footer>
+      <a href="https://www.skool.com/the-arcana-conservatory-6657">Learn Tarot at The Arcana Conservatory</a>
+      <a href="/terms">Terms</a>
+      <a href="mailto:brian@brian-duffy.com">brian@brian-duffy.com</a>
+    </footer>
   </main>
+
+  <dialog id="checkout">
+    <form method="dialog" id="checkout-form">
+      <h2 id="checkout-title">Your reading</h2>
+      <label for="ig">Your Instagram handle</label>
+      <div class="handle"><span>@</span><input id="ig" name="ig" autocomplete="off" autocapitalize="off" spellcheck="false" required placeholder="yourname"></div>
+      <p class="hint">So I know whose cards I'm pulling on the live.</p>
+      <label class="agree"><input type="checkbox" id="agree" required>
+        <span>I understand this reading is for reflection and entertainment, and I agree to the <a href="/terms" target="_blank">terms</a>.</span></label>
+      <p id="error" class="error" role="alert"></p>
+      <div class="actions">
+        <button type="button" id="cancel" class="secondary">Cancel</button>
+        <button type="submit" id="go" disabled>Continue to checkout</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="/app.js"></script>
 </body>
 </html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex">
+  <title>Live switch · Brian Duffy Tarot</title>
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    .switch { width: 100%; padding: 2.2rem 1rem; margin-top: 1.5rem; border-radius: 18px; border: 2px solid var(--gold);
+      font: inherit; font-size: 1.6rem; cursor: pointer; }
+    .switch.on { background: var(--live); border-color: var(--live); color: #fff; }
+    .switch.off { background: var(--panel); color: var(--ink); }
+    .switch:disabled { opacity: .5; }
+    #pin-box input { width: 100%; padding: .9rem; margin: .8rem 0; border-radius: 10px; border: 1px solid var(--muted);
+      background: var(--bg); color: var(--ink); font-size: 1.2rem; text-align: center; letter-spacing: .2em; }
+    #pin-box button { width: 100%; padding: .9rem; border-radius: 10px; border: 1px solid var(--gold);
+      background: var(--gold); color: #1c1220; font: inherit; font-size: 1.1rem; }
+    .state { margin-top: 1rem; font-size: 1.15rem; }
+    .forget { margin-top: 2.5rem; background: none; border: 0; color: var(--muted); font: inherit; text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="stars" aria-hidden="true">✦ ✦ ✦</div>
+      <h1>Live switch</h1>
+    </header>
+
+    <form id="pin-box">
+      <label for="pin">Enter your PIN</label>
+      <input id="pin" type="password" inputmode="numeric" autocomplete="current-password" required>
+      <button type="submit">Unlock</button>
+      <p id="pin-err" class="error" role="alert"></p>
+    </form>
+
+    <section id="panel" hidden>
+      <p class="state" id="state">…</p>
+      <button class="switch" id="switch" type="button">…</button>
+      <p class="how">Turning readings on shows the reading buttons on brianduffytarot.com. Turning them off hides them right away (open pages update within about 15 seconds).</p>
+      <button class="forget" id="forget" type="button">Lock this device</button>
+    </section>
+  </main>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+    let pin = null, open = false;
+    try { pin = localStorage.getItem("livePin"); } catch {}
+
+    async function call(body) {
+      const r = await fetch("/api/status", { method: "POST", headers: { "content-type": "application/json" },
+        body: JSON.stringify({ pin, ...body }) });
+      const data = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(data.error || "Something went wrong");
+      return data;
+    }
+
+    function render() {
+      $("state").textContent = open ? "Readings are OPEN" : "Readings are closed";
+      $("switch").textContent = open ? "Close readings" : "Open readings";
+      $("switch").className = "switch " + (open ? "on" : "off");
+    }
+
+    async function unlock() {
+      try {
+        open = (await call({})).open;
+        try { localStorage.setItem("livePin", pin); } catch {}
+        $("pin-box").hidden = true; $("panel").hidden = false; render();
+      } catch (e) {
+        try { localStorage.removeItem("livePin"); } catch {}
+        $("pin-box").hidden = false; $("panel").hidden = true;
+        $("pin-err").textContent = e.message;
+      }
+    }
+
+    $("pin-box").addEventListener("submit", (e) => { e.preventDefault(); pin = $("pin").value; unlock(); });
+
+    $("switch").addEventListener("click", async () => {
+      $("switch").disabled = true;
+      try { open = (await call({ open: !open })).open; render(); }
+      catch (e) { $("state").textContent = e.message; }
+      $("switch").disabled = false;
+    });
+
+    $("forget").addEventListener("click", () => {
+      try { localStorage.removeItem("livePin"); } catch {}
+      location.reload();
+    });
+
+    if (pin) unlock();
+  </script>
+</body>
+</html>
