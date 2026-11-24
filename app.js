@@ -32,7 +32,7 @@ function validate() { go.disabled = !(cleanHandle() && agree.checked); }
 ig.addEventListener("input", () => { if (ig.value.startsWith("@")) ig.value = ig.value.replace(/^@+/, ""); validate(); });
 agree.addEventListener("change", validate);
 
-document.querySelectorAll(".reading").forEach((btn) => {
+document.querySelectorAll("button.reading[data-cards]").forEach((btn) => {
   btn.addEventListener("click", () => {
     chosen = btn.dataset.cards;
     $("checkout-title").textContent = LABELS[chosen];
