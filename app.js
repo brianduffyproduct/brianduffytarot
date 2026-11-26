@@ -7,7 +7,7 @@ const LABELS = { 1: "One-card reading · $5", 2: "Two-card reading · $10", 3: "
 // ----------------------------------------------------------------------------
 
 const $ = (id) => document.getElementById(id);
-const dialog = $("checkout"), ig = $("ig"), agree = $("agree"), go = $("go"), err = $("error");
+const dialog = $("checkout"), ig = $("ig"), num = $("num"), agree = $("agree"), go = $("go"), err = $("error");
 let chosen = null;
 
 async function isOpen() {
@@ -28,9 +28,15 @@ setInterval(refresh, 15000);
 document.addEventListener("visibilitychange", () => { if (!document.hidden) refresh(); });
 
 const cleanHandle = () => ig.value.trim().replace(/^@+/, "").replace(/\s+/g, "");
-function validate() { go.disabled = !(cleanHandle() && agree.checked); }
+const cardNumber = () => { const n = Number(num.value.trim()); return Number.isInteger(n) && n >= 1 && n <= 78 ? n : null; };
+function validate() {
+  const typed = num.value.trim() !== "";
+  err.textContent = typed && !cardNumber() ? "Please pick a whole number from 1 to 78." : "";
+  go.disabled = !(cleanHandle() && cardNumber() && agree.checked);
+}
 ig.addEventListener("input", () => { if (ig.value.startsWith("@")) ig.value = ig.value.replace(/^@+/, ""); validate(); });
 agree.addEventListener("change", validate);
+num.addEventListener("input", () => { num.value = num.value.replace(/\D/g, ""); validate(); });
 
 document.querySelectorAll("button.reading[data-cards]").forEach((btn) => {
   btn.addEventListener("click", () => {
@@ -38,6 +44,7 @@ document.querySelectorAll("button.reading[data-cards]").forEach((btn) => {
     $("checkout-title").textContent = LABELS[chosen];
     err.textContent = "";
     agree.checked = false;
+    num.value = "";
     validate();
     dialog.showModal();
     ig.focus();
@@ -70,6 +77,7 @@ $("checkout-form").addEventListener("submit", async (e) => {
 
   const params = new URLSearchParams();
   params.set("attributes[Instagram]", "@" + cleanHandle());
+  params.set("attributes[Random number]", String(cardNumber()));
   params.set("attributes[Agreed to terms]", new Date().toISOString());
   params.set("ref", "live");
   window.location.href = `https://${SHOP}/cart/${VARIANTS[chosen]}:1?${params}`;
