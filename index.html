@@ -19,15 +19,15 @@
     <section id="open" class="live-box" hidden>
       <p class="status"><span class="dot" aria-hidden="true"></span> Live now: readings are open</p>
       <div class="buttons">
-        <button class="reading" data-cards="1">
+        <button class="reading" data-product="1">
           <span class="cards" aria-hidden="true"><i></i></span>
           <span class="name">One card</span><span class="price">$5</span>
         </button>
-        <button class="reading" data-cards="2">
+        <button class="reading" data-product="2">
           <span class="cards" aria-hidden="true"><i></i><i></i></span>
           <span class="name">Two cards</span><span class="price">$10</span>
         </button>
-        <button class="reading" data-cards="3">
+        <button class="reading" data-product="3">
           <span class="cards" aria-hidden="true"><i></i><i></i><i></i></span>
           <span class="name">Three cards</span><span class="price">$15</span>
         </button>
@@ -37,6 +37,12 @@
 
     <!-- Links: always shown -->
     <nav class="buttons links" aria-label="Links">
+      <button class="reading" data-product="video">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><rect x="3" y="6.5" width="13" height="11" rx="2"/><path d="m16 10.5 5-3v9l-5-3"/></svg>
+        </span>
+        <span class="name">Video reading<small>3 cards, recorded for you</small></span><span class="price">$33</span>
+      </button>
       <a class="reading" href="https://www.skool.com/the-arcana-conservatory-6657">
         <span class="icon" aria-hidden="true">
           <svg viewBox="0 0 24 24"><path d="M12 4 4 8l8 4 8-4-8-4Z"/><path d="M7 10v4.5c0 1.4 2.2 2.8 5 2.8s5-1.4 5-2.8V10"/><path d="M20 8v5"/></svg>
@@ -65,12 +71,23 @@
   <dialog id="checkout">
     <form method="dialog" id="checkout-form">
       <h2 id="checkout-title">Your reading</h2>
-      <label for="ig">Your Instagram handle</label>
-      <div class="handle"><span>@</span><input id="ig" name="ig" autocomplete="off" autocapitalize="off" spellcheck="false" required placeholder="yourname"></div>
-      <p class="hint">So I know whose cards I'm pulling on the live.</p>
-      <label for="num" class="num-label">Enter a random number between 1 and 78:</label>
-      <input id="num" class="num" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" autocomplete="off" required>
-      <label class="agree"><input type="checkbox" id="agree" required>
+      <div id="live-fields">
+        <label for="ig">Your Instagram handle</label>
+        <div class="handle"><span>@</span><input id="ig" name="ig" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="yourname"></div>
+        <p class="hint">So I know whose cards I'm pulling on the live.</p>
+        <label for="num" class="num-label">Enter a random number between 1 and 78:</label>
+        <input id="num" class="num" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" autocomplete="off">
+      </div>
+      <div id="video-fields" hidden>
+        <p class="hint video-hint">A 15–20 minute Reading of Gifts, recorded just for you. I'll email you a private video link within 5 days.</p>
+        <p class="num-label">Enter three random numbers between 1 and 78, one for each card:</p>
+        <div class="num-row">
+          <label>Card 1<input id="v1" class="num" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" autocomplete="off"></label>
+          <label>Card 2<input id="v2" class="num" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" autocomplete="off"></label>
+          <label>Card 3<input id="v3" class="num" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" autocomplete="off"></label>
+        </div>
+      </div>
+      <label class="agree"><input type="checkbox" id="agree">
         <span>I understand this reading is for reflection and entertainment, and I agree to the <a href="/terms" target="_blank">terms</a>.</span></label>
       <p id="error" class="error" role="alert"></p>
       <div class="actions">
