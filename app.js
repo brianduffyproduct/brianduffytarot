@@ -1,8 +1,8 @@
 // ---- Shopify settings ------------------------------------------------------
 // SHOP is your store's myshopify.com address. VARIANTS are the variant IDs from each
 // product's "Create checkout link" (the number after /cart/ in that link).
-const SHOP = "";            // e.g. "brian-duffy-tarot.myshopify.com"
-const VARIANTS = { 1: "", 2: "", 3: "" };
+const SHOP = "i0kir8-pq.myshopify.com";
+const VARIANTS = { 1: "70054841974818", 2: "70054842040354", 3: "70054842073122" };
 const LABELS = { 1: "One-card reading · $5", 2: "Two-card reading · $10", 3: "Three-card reading · $15" };
 // ----------------------------------------------------------------------------
 
